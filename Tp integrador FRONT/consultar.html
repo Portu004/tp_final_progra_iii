@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TP Integrador front</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/style.css">
 
     <script defer src="js/main.js"></script>
     
@@ -45,18 +45,18 @@
 
         getProduct_form.addEventListener("submit", async (event) => {
 
-            event.preventDefault(); // Evitamos el envio por defecto del formulario
+            event.preventDefault(); 
 
             console.log("Formulario no enviado");
-            console.log(event.target); // Con event target accedemos al evento que disparo el addEventListener
-           
-            // Vamos a guardar como objetos los valores del formulario HTML
-            let formData = new FormData(event.target);
-            console.log(formData); // FormData { idProd → "2" }
+            console.log(event.target); 
+
             
-            // Vamos a transformar este objeto FormData en un objeto normal JavaScript
+            let formData = new FormData(event.target);
+            console.log(formData); 
+            
+            
             let data = Object.fromEntries(formData.entries());
-            console.log(data); // Object { idProd: "3" }
+            console.log(data); 
             
             let idProd = data.idProd;
             console.log(idProd); // 3
@@ -66,15 +66,14 @@
             
             try {
                 console.log(`Haciendo peticion GET a la url: ${url}/${idProd}`)
-                //let respuesta = await fetch(`${url}/${idProd}`);
+                
                 let respuesta = await fetch(`http://localhost:3000/products/${idProd}`);
 
                 let datos = await respuesta.json();
 
-                console.log(datos); // {payload: Array(1), message: 'Producto encontrado'}
-                console.log(datos.payload); // [{…}]
-                console.log(datos.payload[0]); // {id: 1, nombre: 'La maquina de hacer pajaros - Peliculas', tipo: 'LP', precio: 10000, imagen: 'https://i.discogs.com/rKa1bYXYX2w5nIGDULFozlTjVbmM…y9SLTM1MDY2/NjctMTUwOTczNTA0/Ni01NzM4LmpwZWc.jpeg', …}
-
+                console.log(datos); 
+                console.log(datos.payload); 
+                console.log(datos.payload[0]); 
                 let producto = datos.payload[0];
                 console.table(producto);
 
@@ -91,21 +90,6 @@
                 console.log(error);
             }
             
-            /*==========================
-                    Que es FormData?
-            ============================
-            A diferencia de un objeto JavaScript común, FormData está diseñado específicamente para manejar datos de formularios, incluyendo archivos, 
-            y puede ser creado desde un formulario HTML al pasar el elemento form al constructor new FormData(form)
-
-            FormData es una interfaz nativa de JavaScript que permite crear un conjunto de pares clave-valor 
-            que representan los campos de un formulario HTML y sus respectivos valores.
-
-            Esta clase se utiliza principalmente para capturar y enviar datos de formularios, 
-            ya sea mediante métodos como fetch o XMLHttpRequest, 
-            y se encarga de formatear los datos correctamente como multipart/form-data, 
-            estableciendo automáticamente los encabezados necesarios para el envío
-            */
-            // let respuesta = await fetch("http://localhost:3000/products/${idProducto}");
         });
 
     </script>

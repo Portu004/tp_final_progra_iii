@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TP Integrador front</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/style.css">
 
     <script defer src="js/main.js"></script>
     
 </head>
 <body>
-     <header>
+    <header>
         <nav>
             <ul>
                 <li><a href="index.html">Ver</a></li>
@@ -45,16 +45,15 @@
 
         getProduct_form.addEventListener("submit", async (event) => {
 
-            event.preventDefault(); // Evitamos el envio por defecto del formulario
+            event.preventDefault(); 
 
             console.log("Formulario no enviado");
-            console.log(event.target); // Con event target accedemos al evento que disparo el addEventListener
-           
-            // Vamos a guardar como objetos los valores del formulario HTML
+            console.log(event.target);
+
             let formData = new FormData(event.target);
-            console.log(formData); // FormData { idProd → "2" }
+            console.log(formData); 
             
-            // Vamos a transformar este objeto FormData en un objeto normal JavaScript
+            
             let data = Object.fromEntries(formData.entries());
             console.log(data); // Object { idProd: "3" }
             
@@ -66,19 +65,18 @@
             
             try {
                 console.log(`Haciendo peticion GET a la url: ${url}/${idProd}`)
-                //let respuesta = await fetch(`${url}/${idProd}`);
+                
                 let respuesta = await fetch(`http://localhost:3300/products/${idProd}`);
 
                 let datos = await respuesta.json();
 
-                console.log(datos); // {payload: Array(1), message: 'Producto encontrado'}
-                console.log(datos.payload); // [{…}]
-                console.log(datos.payload[0]); // {id: 1, nombre: 'La maquina de hacer pajaros - Peliculas', tipo: 'LP', precio: 10000, imagen: 'https://i.discogs.com/rKa1bYXYX2w5nIGDULFozlTjVbmM…y9SLTM1MDY2/NjctMTUwOTczNTA0/Ni01NzM4LmpwZWc.jpeg', …}
+                console.log(datos); 
+                console.log(datos.payload); 
+                console.log(datos.payload[0]); 
 
                 let producto = datos.payload[0];
                 console.table(producto);
 
-                // Creamos un nuevo boton a nuestro listado de ver producto
                 let htmlProducto = `
                     <li class="li-listados">
                         <img src="${producto.imagen}" alt="${producto.nombre}">
@@ -89,16 +87,16 @@
                     </li>
                 `;
 
-                // Renderizamos el listado en la pagina
+                
                 listaProductos.innerHTML = htmlProducto;
 
 
-                // Vamos a asignarle un evento click a nuestro boton "Eliminar producto"
+                
                 let deleteProduct_button = document.getElementById("deleteProduct_button");
 
                 deleteProduct_button.addEventListener("click", event => {
 
-                    event.stopPropagation(); // Evitamos la propagacion de eventos
+                    event.stopPropagation(); 
 
                     let confirmacion = confirm("Queres eliminar este producto?");
 
@@ -111,7 +109,7 @@
                 });
 
                 async function eliminarProducto(id) {
-                    console.log(id); // Recibimos correctamente el id
+                    console.log(id); 
 
                     try {
                         let response = await fetch(`http://localhost:3300/products/${id}`, {
@@ -123,7 +121,7 @@
                         if(response.ok) {
                             alert(result.message);
 
-                            // Vaciamos la lista
+                            
                             listaProductos.innerHTML = "";
                         }
 

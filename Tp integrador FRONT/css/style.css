@@ -8,6 +8,7 @@ li {
 }
 
 
+
 /*Encabezado*/
 
 nav {
@@ -80,4 +81,11 @@ nav ul {
 
 #getProduct-form {
     margin-bottom: 20px;
+}
+
+h1 {
+        display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
 }

@@ -1,3 +1,7 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 
 ul {
     padding-left: 0;
@@ -81,6 +85,7 @@ nav ul {
 
 #getProduct-form {
     margin-bottom: 20px;
+    text-align: center;
 }
 
 h1 {
@@ -89,3 +94,14 @@ h1 {
     align-items: center;
     justify-content: center;
 }
+
+a {
+    text-decoration: none;
+    color: red;
+    font-size: 17px;
+}
+
+a:hover{
+    color: rgb(80, 21, 21);
+}
+

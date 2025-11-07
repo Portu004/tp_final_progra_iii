@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 export default {
-    port: process.env.PORT || 3100,
+    port: process.env.PORT || 3000,
     database: {
         host: process.env.DB_HOST,
         name: process.env.DB_NAME,

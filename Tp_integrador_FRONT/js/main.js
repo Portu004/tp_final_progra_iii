@@ -2,7 +2,7 @@ let contenedorProductos = document.getElementById("contenedor-productos");
 
 async function obtenerProductos() {
     try {
-        let respuesta = await fetch("http://localhost:3300/products"); 
+        let respuesta = await fetch("http://localhost:3000/products"); 
         
         let respuestaFormato = await respuesta.json(); // Esto es { playload: [...] }
         

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Login Electrodomésticos</title>
+<style>
+    body { font-family: Arial; text-align: center; padding: 40px; }
+    .form-container { display: none; margin-top: 20px; }
+    input { margin: 5px; padding: 8px; }
+</style>
+</head>
+<body>
+
+<h1>Sistema de Electrodomésticos</h1>
+
+<button onclick="mostrarFormulario('admin')">Entrar como Administrador</button>
+<button onclick="mostrarFormulario('cliente')">Entrar como Cliente</button>
+
+<!-- Login Administrador -->
+<div id="adminForm" class="form-container">
+    <h2>Login Administrador</h2>
+    <form id="formAdmin">
+    <input type="text" id="adminUser" placeholder="Usuario" required><br>
+    <input type="password" id="adminPass" placeholder="Contraseña" required><br>
+    <button type="submit">Ingresar</button>
+    <button type="button" onclick="accesoRapido()">Acceso rápido</button>
+</form>
+</div>
+
+<!-- Login Cliente -->
+<div id="clienteForm" class="form-container">
+    <h2>Login Cliente</h2>
+    <form id="formCliente">
+    <input type="text" id="clienteNombre" placeholder="Tu nombre" required><br>
+    <button type="submit">Entrar</button>
+    </form>
+</div>
+<script>
+    function mostrarFormulario(tipo) {
+    document.getElementById('adminForm').style.display = tipo === 'admin' ? 'block' : 'none';
+    document.getElementById('clienteForm').style.display = tipo === 'cliente' ? 'block' : 'none';
+    }
+
+// Enviar login de admin
+    function accesoRapido() {
+    document.getElementById('adminUser').value = 'admin@empresa.com';
+    document.getElementById('adminPass').value = '1234';
+}
+
+    document.getElementById('formAdmin').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const usuario = document.getElementById('adminUser').value;
+    const password = document.getElementById('adminPass').value;
+    const res = await fetch('http://localhost:3000/loginAdmin', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ usuario, password })
+    });
+    const data = await res.json();
+    if (data.ok) {
+        alert('Bienvenido Administrador');
+        window.location.href = 'index.html';
+    } else {
+        alert('Credenciales incorrectas');
+    }
+    });
+
+    // Enviar login de cliente
+    document.getElementById('formCliente').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const nombre = document.getElementById('clienteNombre').value;
+    const res = await fetch('http://localhost:3000/loginCliente', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nombre })
+    });
+    const data = await res.json();
+    alert(`Bienvenido ${data.nombre}`);
+    window.location.href = 'cliente.html';
+    });
+</script>
+</body>
+</html>
+

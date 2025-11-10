@@ -151,6 +151,39 @@ app.delete("/products/:id", async (req, res) => {
 });
 
 
+// Login Administrador
+app.post('/loginAdmin', async (req, res) => {
+try {
+    const { usuario, password } = req.body;
+    const [rows] = await connection.execute(
+      'SELECT * FROM usuarios WHERE correo = ? AND contrasenia = ?',
+    [usuario, password]
+    );
+
+    if (rows.length > 0) {
+    res.json({ ok: true });
+    } else {
+    res.json({ ok: false });
+    }
+} catch (error) {
+    console.error("Error en loginAdmin:", error.message);
+    res.status(500).json({ ok: false, message: "Error interno del servidor" });
+}
+});
+
+// Login Cliente
+app.post('/loginCliente', async (req, res) => {
+try {
+    const { nombre } = req.body;
+    await connection.execute('INSERT IGNORE INTO clientes (nombre) VALUES (?)', [nombre]);
+    res.json({ ok: true, nombre });
+} catch (error) {
+    console.error("Error en loginCliente:", error.message);
+    res.status(500).json({ ok: false, message: "Error interno del servidor" });
+}
+});
+
+
 app.listen(PORT, () =>{
     console.log(`servidor corriendo en el puerto:${PORT}`);
 });

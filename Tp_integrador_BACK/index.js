@@ -172,17 +172,32 @@ try {
 });
 
 // Login Cliente
-app.post('/loginCliente', async (req, res) => {
-try {
-    const { nombre } = req.body;
-    await connection.execute('INSERT IGNORE INTO clientes (nombre) VALUES (?)', [nombre]);
-    res.json({ ok: true, nombre });
-} catch (error) {
-    console.error("Error en loginCliente:", error.message);
-    res.status(500).json({ ok: false, message: "Error interno del servidor" });
-}
-});
+app.post('/loginCliente', (req, res) => {
+    try {
+        const { nombre } = req.body;
 
+        if (!nombre || nombre.trim() === "") {
+            return res.status(400).json({
+                ok: false,
+                message: "Debe ingresar un nombre válido"
+            });
+        }
+
+        // Si todo está bien, devolvemos el nombre
+        res.status(200).json({
+            ok: true,
+            nombre
+        });
+
+    } catch (error) {
+        console.error("Error en loginCliente:", error.message);
+
+        res.status(500).json({
+            ok: false,
+            message: "Error interno del servidor"
+        });
+    }
+});
 
 app.listen(PORT, () =>{
     console.log(`servidor corriendo en el puerto:${PORT}`);

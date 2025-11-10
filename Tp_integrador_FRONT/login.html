@@ -66,18 +66,25 @@
     });
 
     // Enviar login de cliente
-    document.getElementById('formCliente').addEventListener('submit', async (e) => {
+document.getElementById('formCliente').addEventListener('submit', async (e) => {
     e.preventDefault();
     const nombre = document.getElementById('clienteNombre').value;
+
     const res = await fetch('http://localhost:3000/loginCliente', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ nombre })
     });
+
     const data = await res.json();
-    alert(`Bienvenido ${data.nombre}`);
-    window.location.href = 'cliente.html';
-    });
+
+    if (data.ok) {
+        alert(`Bienvenido ${data.nombre}`);
+        window.location.href = 'cliente.html';
+    } else {
+        alert('Error: ' + (data.message || 'No se pudo iniciar sesión.'));
+    }
+});
 </script>
 </body>
 </html>

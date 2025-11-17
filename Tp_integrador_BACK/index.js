@@ -1,154 +1,44 @@
 import express from "express";
-const app = express();
+const app = express(); // app es la instancia de la aplicacion express
 
-import environments from "./src/api/config/environments.js";
-
-import connection from "./src/api/database/db.js";
+import environments from "./src/api/config/environments.js"; // Importamos las variables de entorno para definir el puerto
+const PORT = environments.port;
 
 import cors from "cors";
 
-const PORT = environments.port;
-console.log(PORT);
+import { loggerUrl, saluditos } from "./src/api/middlewares/middlewares.js";
+import { productRoutes } from "./src/api/routes/index.js";
 
 
+/*====================
+    Middlewares
+====================*/
+app.use(cors()); //Middleware CORS basico que permite todas las solicitudes
+app.use(express.json()); // Middleware que transforma el JSON de las peticiones POST y PUT a objetos JS
+app.use(loggerUrl);
 
-
-
-app.use(cors());
-app.use(express.json());
-
-
-app.get("/", (req, res) => {
-    res.send("hola mundo desde express.js")
-});
-
-
+// Middleware saluditos, saluda entre la peticion req y la respuesta
+// app.use(saluditos);
 
 
 
 /*==================
-    Endpoints
+    Rutas
 ==================*/
-app.get("/", (req, res) => {
-    res.send("Holis mundo desde Express.js");
+
+// Endpoint que no devuelve ninguna respuesta y queda la llamada colgada y la conexion sin terminar
+app.get("/test", (req, res) => {
+    console.log("Este endpoint no ofrece ninguna respuesta y se queda aca trabado...");
 });
 
-
-//Traer todos los productos
-app.get("/products", async (req, res) => {
-
-    try {
-        const sql = "SELECT * FROM productos";
-    
-        // Con rows extraemos exclusivamente los datos que solicitamos en la consulta
-        const [rows] = await connection.query(sql);
-
-        // Comprobamos que se reciban correctamente los productos
-        // console.log(rows);
-        
-        res.status(200).json({
-            payload: rows
-        });
-        
-    
-    } catch (error) {
-        console.error("Error obteniendo productos", error.message);
-
-        res.status(500).json({
-            message: "Error interno al obtener productos"
-        });
-    }
-});
-
-
-// Get product by id -> Consultar producto por su id
-app.get("/products/:id", async (req, res) => {
-
-    try {
-        // let id = req.params.id;
-        let { id } = req.params; 
-        
-        let sql = "SELECT * FROM productos WHERE productos.id = ?"; 
-        
-        let [rows] = await connection.query(sql, [id]); 
-
-        console.log(rows);
-
-        res.status(200).json({
-            payload: rows,
-            message: "Producto encontrado"
-        });
-
-        
-    } catch(error) {
-        console.error(`Error obteniendo productos con id ${id}`, error.message);
-
-        res.status(500).json({
-            message: "Error interno al obtener producto con id"
-        })
-    }
-
-
-})
+app.use("/api/products", productRoutes);
+// app.use("/api/users", rutasUsuarios);
 
 
 
 
 
-app.post("/products", async (req, res) => {
 
-    try {
-        
-        let { image, name, price, type } = req.body;
-
-        console.log(req.body);
-
-        let sql = `INSERT INTO productos (imagen, nombre, precio, tipo) VALUES (?, ?, ?, ?)`;
-
-        let [rows] = await connection.query(sql, [image, name, price, type]);
-
-        // Codigo de estado 201 -> Created
-        res.status(200).json({
-            message: "Producto creado con exito"
-        });
-
-    } catch(error) {
-        console.log(error);
-
-        res.status(500).json({
-            message: "Error interno del servidor",
-            error: error.message
-        })
-    }
-});
-
-
-// DELETE -> Eliminar un producto por su id
-app.delete("/products/:id", async (req, res) => {
-    try {
-        let { id } = req.params;
-
-        
-        let sql = "DELETE FROM productos WHERE id = ?";
-
-        
-
-        let [result] = await connection.query(sql, [id]);
-        console.log(result);
-
-        return res.status(200).json({
-            message: `Producto con id ${id} eliminado correctamente`
-        });
-
-    } catch(error) {
-        console.error("Error al eliminar un producto: ", error);
-
-        res.status(500).json({
-            message: `Error al eliminar un producto con id ${id}: `, error,
-            error: error.message
-        })
-    }
-});
 
 
 // Login Administrador
@@ -199,6 +89,6 @@ app.post('/loginCliente', (req, res) => {
     }
 });
 
-app.listen(PORT, () =>{
-    console.log(`servidor corriendo en el puerto:${PORT}`);
+app.listen(PORT, () => {
+    console.log(`Servidor corriendo en el puerto ${PORT}`);
 });

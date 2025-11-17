@@ -32,9 +32,9 @@
 
             <label for="typeProd">Categoria</label>
             <select name="type" id="typeProd" required>
-                <option value="LP">Celular</option>
-                <option value="CD">Auricular</option>
-                <option value="CD">Cargador</option>
+                <option value="CEL">Celular</option>
+                <option value="AUR">Auricular</option>
+                <option value="CAR">Cargador</option>
             </select>
 
             <label for="priceProd">Precio</label>
@@ -50,7 +50,7 @@
     <script>
         let contenedorProductos = document.getElementById("contenedor-productos");
         let altaProductsForm = document.getElementById("altaProducts-form");
-        let url = "http://localhost:3000/products";
+        let url = "http://localhost:3000/api/products";
 
 
         altaProductsForm.addEventListener("submit", async (event) => {

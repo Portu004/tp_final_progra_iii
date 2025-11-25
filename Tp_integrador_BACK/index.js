@@ -8,6 +8,9 @@ import cors from "cors";
 
 import { loggerUrl, saluditos } from "./src/api/middlewares/middlewares.js";
 import { productRoutes } from "./src/api/routes/index.js";
+import { join, __dirname } from "./src/api/utils/index.js";
+import connection from "./src/api/database/db.js";
+
 
 
 /*====================
@@ -19,6 +22,20 @@ app.use(loggerUrl);
 
 // Middleware saluditos, saluda entre la peticion req y la respuesta
 // app.use(saluditos);
+
+
+// Middleware para servir archivos estaticos
+app.use(express.static(join(__dirname, "src/public"))); // Vamos a construir la ruta relativa para servir los archivos de la carpeta /public
+
+
+/*=====================
+    Configuracion
+====================*/
+app.set("view engine", "ejs"); // Configuramos EJS como motor de plantillas
+app.set("views", join(__dirname, "src/views")); // Indicamos la ruta de las vistas en nuestro proyecto
+
+
+
 
 
 
@@ -35,10 +52,37 @@ app.use("/api/products", productRoutes);
 // app.use("/api/users", rutasUsuarios);
 
 
+// TO DO -> Por que no linkea bien las rutas de js y css desde viewRoutes /dashboard/consultar
+//app.use("/dashboard", viewRoutes);
+// Rutas de las vistas
+app.get("/index", async (req, res) => {
+    try {
 
+        const [rows] = await connection.query("SELECT * FROM productos")
+        res.render("index", {
+            productos: rows
+        });
 
+    } catch (error) {
+        console.error(error)
+    }
+});
 
+app.get("/consultar", (req, res) => {
+    res.render("get");
+});
 
+app.get("/crear", (req, res) => {
+    res.render("create");
+});
+
+app.get("/modificar", (req, res) => {
+    res.render("update");
+});
+
+app.get("/eliminar", (req, res) => {
+    res.render("delete");
+});
 
 
 // Login Administrador

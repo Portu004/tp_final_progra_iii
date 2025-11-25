@@ -3,10 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="css/cliente.css">
+    <title>ElectroTech</title>
+    <link rel="stylesheet" href="../css/cliente.css" />
+    <script defer src="../js/script.js"></script>
 </head>
 <body>
-    
+    <header>
+        <nav>
+        
+        <span>ElectroTech</span>
+        
+        <div>
+        <span id="datos-alumno"></span>
+        <label for="barra-busqueda"></label>
+        <input type="text" id="barra-busqueda" placeholder="buscar fruta...">
+        </div>
+        
+        <span id="contador-carrito">Carrito: 0 productos</span>
+        
+        </nav>
+        
+        
+    </header>
+    <main>
+        <section id="contenedor-titulo">
+        <h2>Nuestros productos</h2>
+        </section>
+        
+        <section id="contenedor-ordenamientos">
+        <button id="ordenar-nombre">Ordenar por Nombre</button>
+        <button id="ordenar-precio">Ordenar por Precio</button>
+        </section>
+        
+        <section id="contenedor-productos"></section>
+        <hr>
+        <section id="contenedor-carrito"></section>
+        
+    </main>
+    <div id="total-carrito">Total: </div>
 </body>
 </html>

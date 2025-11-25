@@ -1,15 +1,16 @@
 <%- include("partials/head.ejs") %>
 <%- include("partials/nav.ejs") %>
-
+    <link rel="stylesheet" href="css/modificar.css">
+    <link rel="icon" type="image/png" href="img/icono-robot.png">
     <main>
-        <h1>Actualizar producto</h1>
+        <h1>Modificar producto</h1>
         <hr>
         
         <form id="getProduct-form">
             <label for="idProd">Id del producto</label>
             <input type="number" name="idProd" id="idProd" required>
         
-            <input type="submit" value="Consultar producto">
+            <input type="submit" value="Consultar producto" id="estilo-botones">
         </form>
         
         <div id="contenedor-productos">

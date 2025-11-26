@@ -22,5 +22,8 @@ router.get("/eliminar", (req, res) => {
     res.render("delete");
 });
 
+router.get("/login", (req, res) => {
+    res.render("login")
+})
 // Exportamos todas las rutas
 export default router;

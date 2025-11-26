@@ -3,15 +3,16 @@ const app = express(); // app es la instancia de la aplicacion express
 
 import environments from "./src/api/config/environments.js"; // Importamos las variables de entorno para definir el puerto
 const PORT = environments.port;
+const SESSION_KEY = environments.session_key;
 
 import cors from "cors";
 
 import { loggerUrl, saluditos } from "./src/api/middlewares/middlewares.js";
-import { productRoutes } from "./src/api/routes/index.js";
+import { productRoutes, viewRoutes } from "./src/api/routes/index.js";
 import { join, __dirname } from "./src/api/utils/index.js";
 import connection from "./src/api/database/db.js";
 
-
+import session from "express-session";
 
 /*====================
     Middlewares
@@ -27,7 +28,15 @@ app.use(loggerUrl);
 // Middleware para servir archivos estaticos
 app.use(express.static(join(__dirname, "src/public"))); // Vamos a construir la ruta relativa para servir los archivos de la carpeta /public
 
+app.use(session({
+    secret: SESSION_KEY,
+    resave: false,
+    saveUininitialized: true
+}));
 
+app.use(express.urlencoded({
+    extended: true
+}))
 /*=====================
     Configuracion
 ====================*/
@@ -51,6 +60,7 @@ app.get("/test", (req, res) => {
 app.use("/api/products", productRoutes);
 // app.use("/api/users", rutasUsuarios);
 
+app.use("/", viewRoutes);
 
 // TO DO -> Por que no linkea bien las rutas de js y css desde viewRoutes /dashboard/consultar
 //app.use("/dashboard", viewRoutes);
@@ -84,52 +94,34 @@ app.get("/eliminar", (req, res) => {
     res.render("delete");
 });
 
-
-// Login Administrador
-app.post('/loginAdmin', async (req, res) => {
+app.post("/api/users", async (req, res) => {
 try {
-    const { usuario, password } = req.body;
-    const [rows] = await connection.execute(
-      'SELECT * FROM usuarios WHERE correo = ? AND contrasenia = ?',
-    [usuario, password]
-    );
+        const { correo, password } = req.body;
 
-    if (rows.length > 0) {
-    res.json({ ok: true });
-    } else {
-    res.json({ ok: false });
-    }
-} catch (error) {
-    console.error("Error en loginAdmin:", error.message);
-    res.status(500).json({ ok: false, message: "Error interno del servidor" });
-}
-});
-
-// Login Cliente
-app.post('/loginCliente', (req, res) => {
-    try {
-        const { nombre } = req.body;
-
-        if (!nombre || nombre.trim() === "") {
+        if(!correo || !password ) {
             return res.status(400).json({
-                ok: false,
-                message: "Debe ingresar un nombre válido"
+                message: "Datos invalidos, asegurate de enviar todos los campos"
             });
         }
 
-        // Si todo está bien, devolvemos el nombre
-        res.status(200).json({
-            ok: true,
-            nombre
+        let sql = 
+            `INSERT INTO usuarios (correo, password)
+            VALUES (?, ?)`
+        ;
+
+        const [rows] = await connection.query(sql, [correo, password]);
+
+        res.status(201).json({
+            message: "Usuario creado con exito",
         });
 
     } catch (error) {
-        console.error("Error en loginCliente:", error.message);
+        console.error(error);
 
         res.status(500).json({
-            ok: false,
-            message: "Error interno del servidor"
-        });
+            message: "Error interno en el servidor",
+            error: error
+        })
     }
 });
 

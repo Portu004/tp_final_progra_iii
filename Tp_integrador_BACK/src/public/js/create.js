@@ -1,6 +1,6 @@
 let contenedorProductos = document.getElementById("contenedor-productos");
 let altaProductsForm = document.getElementById("altaProducts-form");
-let url = "http://localhost:3000/api/products";
+let url = "http://localhost:3000";
 
 
 altaProductsForm.addEventListener("submit", async (event) => {

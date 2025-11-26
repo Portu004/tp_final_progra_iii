@@ -33,9 +33,21 @@ const saluditos = (req, res, next) => {
     next();
 }
 
+// Middleware de ruta 
+const requireLogin = (req, res, next) => {
+    // Chequeamos si no existe la sesion de usuario, de ser asi, redirigimos a /login
+    if(!req.session.user) {
+        return res.redirect("/login");
+    }
+    next(); // Sin el next, nunca llega a procesar la respuesta -> response
+};
+
+
+
 
 export {
     loggerUrl,
     validateId,
-    saluditos
+    saluditos,
+    requireLogin
 }

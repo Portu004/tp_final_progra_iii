@@ -50,12 +50,13 @@ nav ul {
     box-shadow: #483561;
     border-radius: 12px;
     width: 300px;
-    height: 300px;
+    min-height: 300px;
     margin: 10px;
     font-size: 16px;
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     box-shadow: 0 0 15px rgba(112, 0, 255, 0.4);
+    justify-content: space-between;
 }
 
 .card-producto:hover{

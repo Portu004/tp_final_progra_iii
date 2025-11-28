@@ -1,15 +1,124 @@
-body { 
-    font-family: Arial;
-    text-align: center;
-    padding: 40px; 
+/* ======================== */
+/*  Configuración General */
+/* ======================== */
+body {
+    background-color: #1a0033;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    color: #e0e0e0; 
 }
 
-.form-container { 
-    display: none; 
-    margin-top: 20px;
+/* ======================== */
+/*  Títulos y Mensajes  */
+/* ======================== */
+h1 {
+    color: #9d4edd;
+    margin-bottom: 5px;
+    font-size: 42px;
+    font-weight: bold;
 }
-    
-input { 
-    margin: 5px;
-    padding: 8px;
+
+h3 {
+    color: #c0a0e0;
+    margin-top: 0;
+    margin-bottom: 30px;
+    font-size: 18px;
+    font-weight: normal;
+}
+
+.error-message {
+    background-color: #5a189a; 
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #7b2cbf;
+    font-weight: bold;
+}
+
+/* ======================== */
+/* Contenedor del Formulario  */
+/* ======================== */
+#login-form {
+    background-color: #2b0057;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
+    text-align: left;
+    width: 300px; 
+}
+
+/* ======================== */
+/* Campos de Entrada  */
+/* ======================== */
+label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 8px;
+    color: #e0e0e0;
+    font-size: 17px;
+}
+
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #5a189a;
+    border-radius: 8px;
+    background-color: #3c007a;
+    color: #ffffff;
+    font-size: 15px;
+    outline: none;
+    box-sizing: border-box; 
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus {
+    border-color: #7b2cbf;
+    box-shadow: 0 0 5px rgba(157, 77, 237, 0.5);
+}
+
+/* ======================== */
+/* Botones (Login y Acceso Rápido)  */
+/* ======================== */
+.btn-login {
+    width: 100%;
+    padding: 12px;
+    margin-top: 25px;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Estilos específicos para el botón Login (Submit) */
+input[type="submit"] {
+    background-color: #9d4edd; 
+    color: white;
+}
+
+input[type="submit"]:hover {
+    background-color: #7b2cbf; 
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* Estilos específicos para el botón Acceso Rápido (Button) */
+#acceso {
+    background-color: #5a189a; 
+    color: #e0e0e0;
+}
+
+#acceso:hover {
+    background-color: #3c007a; 
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
 }

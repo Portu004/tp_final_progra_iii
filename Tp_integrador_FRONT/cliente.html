@@ -9,30 +9,32 @@
 </head>
 <body>
     <header>
+        
+        
         <nav>
-        
-        <span>ElectroTech</span>
-        
-        <div>
-        <span id="datos-alumno"></span>
-        <label for="barra-busqueda"></label>
-        <input type="text" id="barra-busqueda" placeholder="buscar productos...">
-        </div>
-        
-        <span id="contador-carrito">Carrito: 0 productos</span>
-        
+            <div class="logo-container">
+                <img src="img/logo-final.png" alt="ElectroTech">
+                <!-- Saqué el <span>ElectroTech</span> -->
+            </div>
+            
+            <div class="search-container">
+                <span id="datos-alumno"></span>
+                <input type="text" id="barra-busqueda" placeholder=" Buscar...">
+            </div>
+            
+            <span id="contador-carrito">🛒 Carrito: 0 productos</span>
         </nav>
-        
+                
         
     </header>
     <main>
         <section id="contenedor-titulo">
-        <h2>Nuestros productos</h2>
+        <h2>Tech store</h2>
         </section>
         
         <section id="contenedor-ordenamientos">
-        <button id="ordenar-nombre">Ordenar por Nombre</button>
-        <button id="ordenar-precio">Ordenar por Precio</button>
+        <button id="ordenar-nombre">Ordenar por nombre</button>
+        <button id="ordenar-precio">Ordenar por precio</button>
         </section>
         
         <section id="contenedor-productos"></section>
@@ -40,6 +42,5 @@
         <section id="contenedor-carrito"></section>
         
     </main>
-    <div id="total-carrito">Total: </div>
 </body>
 </html>

@@ -1,5 +1,7 @@
 body {
     font-family: Arial, Helvetica, sans-serif;
+    background-color: #0A0A0A;
+    color: white;
 }
 
 
@@ -9,6 +11,7 @@ ul {
 
 li {
     list-style-type: none;
+    
 }
 
 
@@ -31,28 +34,6 @@ nav ul {
     width: 50%;
 }
 
-/*main*/
-#contenedor-productos {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.card-producto {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border: 2px solid;
-    width: 300px;
-    height: 300px;
-    margin: 10px;
-    font-size: 12px;
-    text-align: center;
-}
-
-.card-producto img {
-    width: 130px;
-}
 
 
 #lista-productos {
@@ -83,24 +64,132 @@ nav ul {
     align-items: center;
 }
 
-#getProduct-form {
-    margin-bottom: 20px;
-    text-align: center;
-}
 
 h1 {
-        display: flex;
+    display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
+    margin-bottom: 0px;
+    padding-bottom: 10px;
+    font-size: 25px;
 }
+
+h1:hover {
+    color: #7000FF;
+}
+
+
+hr{
+    margin: 0px auto;
+    width: 90%; 
+    border: 0;
+    border-top: 1px solid #444; 
+    margin-bottom: 20px;
+    border: 0; 
+    height: 2px;
+    background-image: linear-gradient(
+        to right,                 
+        rgba(112, 0, 255, 0),     
+        rgba(112, 0, 255, 0.75),  
+        rgba(112, 0, 255, 0)      
+    );
+}
+
 
 a {
     text-decoration: none;
-    color: red;
+    color: #E0E0E0;
     font-size: 17px;
 }
 
 a:hover{
-    color: rgb(80, 21, 21);
+    color: #7000FF;
 }
+
+#logo-pagina{
+    width: 120px;
+    height: 120px;
+    padding: 0%;
+    margin: 0%;
+}
+
+.contenedor-logo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ========================
+   1. Estilo del Contenedor del Formulario
+   ======================== */
+#altaProducts-form {
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #1a1a1a;
+    border: 1px solid #7000FF;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(112, 0, 255, 0.4);
+    
+    display: flex;
+    flex-direction: column;
+    gap: 15px; 
+    align-items: stretch;
+}
+
+/* 2. Estilo de Etiquetas */
+#altaProducts-form label {
+    justify-self: end; 
+    font-size: 16px;
+    color: #E0E0E0;
+    font-weight: bold;
+}
+
+/* 3. Estilo de Inputs y Select */
+#altaProducts-form input[type="text"],
+#altaProducts-form input[type="number"],
+#altaProducts-form select {
+    background-color: #2b2b2b;
+    border: 1px solid #483561; 
+    color: white;
+    padding: 10px 12px;
+    font-size: 16px;
+    border-radius: 8px;
+    width: 100%; 
+    box-sizing: border-box; 
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    appearance: none;
+}
+
+#altaProducts-form input:focus,
+#altaProducts-form select:focus {
+    outline: none;
+    border-color: #7000FF; 
+    box-shadow: 0 0 8px rgba(112, 0, 255, 0.6);
+}
+
+#altaProducts-form input[type="submit"] {
+    grid-column: 1 / span 2; 
+    
+    background-color: #7000FF;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    margin-top: 15px;
+}
+
+#altaProducts-form input[type="submit"]:hover {
+    background-color: #9933FF;
+    box-shadow: 0 0 20px rgba(112, 0, 255, 0.8);
+}
+
+#altaProducts-form br {
+    display: none;
+}
+

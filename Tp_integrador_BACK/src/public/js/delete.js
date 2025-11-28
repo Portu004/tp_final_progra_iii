@@ -38,16 +38,21 @@ getProduct_form.addEventListener("submit", async (event) => {
         let producto = datos.payload[0];
         console.table(producto);
 
-        // Creamos un nuevo boton a nuestro listado de ver producto
-        let htmlProducto = `
-            <li class="li-listados">
-                <img src="${producto.imagen}" alt="${producto.nombre}">
-                <p>Id: ${producto.id} / Nombre: ${producto.nombre} / <strong>Precio: ${producto.precio}</strong></p>
-            </li>
-            <li class="li-botonera">
-                <input type="button" id="deleteProduct_button" value="Eliminar producto">
-            </li>
-        `;
+        // Corregido: Un solo <li> para contener la tarjeta completa y el botón.
+    let htmlProducto = `
+    <li class="li-listados">
+        
+        <div class="product-info-display">
+            <img src="${producto.imagen}" alt="${producto.nombre}">
+            <p>Id: ${producto.id} / Nombre: ${producto.nombre} / <strong>Precio: ${producto.precio}</strong></p>
+        </div>
+        
+        <input type="button" id="deleteProduct_button" value="Eliminar producto">
+    </li>
+    `;
+
+// Nota: He mantenido el ID del botón como "deleteProduct_button" (basado en tu código JS original) 
+// y he añadido un <div> con clase "product-info-display" para agrupar imagen y texto.
 
         // Renderizamos el listado en la pagina
         listaProductos.innerHTML = htmlProducto;

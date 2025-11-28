@@ -1,5 +1,7 @@
 body {
     font-family: Arial, Helvetica, sans-serif;
+    background-color: #0A0A0A;
+    color: white;
 }
 
 
@@ -9,6 +11,7 @@ ul {
 
 li {
     list-style-type: none;
+    
 }
 
 
@@ -31,35 +34,9 @@ nav ul {
     width: 50%;
 }
 
-/*main*/
-#contenedor-productos {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-.card-producto {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border: 2px solid;
-    width: 300px;
-    height: 300px;
-    margin: 10px;
-    font-size: 12px;
-    text-align: center;
-}
-
-.card-producto img {
-    width: 130px;
-}
 
 
-#lista-productos {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-}
+
 
 .li-listados {
     font-size: 14px;
@@ -83,24 +60,171 @@ nav ul {
     align-items: center;
 }
 
-#getProduct-form {
-    margin-bottom: 20px;
-    text-align: center;
-}
 
 h1 {
-        display: flex;
+    display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
+    margin-bottom: 0px;
+    padding-bottom: 10px;
+    font-size: 25px;
 }
+
+h1:hover {
+    color: #7000FF;
+}
+
+
+hr{
+    margin: 0px auto;
+    width: 90%; 
+    border: 0;
+    border-top: 1px solid #444; 
+    margin-bottom: 20px;
+    border: 0; 
+    height: 2px;
+    background-image: linear-gradient(
+        to right,                 
+        rgba(112, 0, 255, 0),     
+        rgba(112, 0, 255, 0.75),  
+        rgba(112, 0, 255, 0)      
+    );
+}
+
 
 a {
     text-decoration: none;
-    color: red;
+    color: #E0E0E0;
     font-size: 17px;
 }
 
 a:hover{
-    color: rgb(80, 21, 21);
+    color: #7000FF;
+}
+
+#logo-pagina{
+    width: 120px;
+    height: 120px;
+    padding: 0%;
+    margin: 0%;
+}
+
+.contenedor-logo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ========================
+ESTILOS PARA FORMULARIO ELIMINAR
+   ======================== */
+
+#getProduct-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    max-width: 650px;
+    margin: 40px auto 30px auto;
+    background-color: #1a1a1a;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(112, 0, 255, 0.1);
+}
+
+#getProduct-form label {
+    margin-right: 15px;
+    font-size: 18px;
+    color: #E0E0E0;
+    font-weight: bold;
+}
+
+
+#idProd {
+    background-color: #2b2b2b;
+    border: 1px solid #7000FF;
+    color: white;
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 8px;
+    width: 100px;
+    text-align: center;
+    transition: box-shadow 0.3s ease;
+}
+
+#idProd:focus {
+    outline: none;
+    box-shadow: 0 0 8px rgba(112, 0, 255, 0.6);
+}
+
+#getProduct-form input[type="submit"] {
+    background-color: #DC3545;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    margin-left: 15px;
+}
+
+#getProduct-form input[type="submit"]:hover {
+    background-color: #C82333;
+    box-shadow: 0 0 15px rgba(220, 53, 69, 0.8);
+}
+
+
+/* ========================
+Estilos del Contenedor de Resultado y Botón ELIMINAR
+   ======================== */
+
+
+.li-listados {
+    display: flex;
+    flex-direction: row; 
+    align-items: center;
+    justify-content: space-between; 
+
+    border: 1px solid #7000FF;
+    border-radius: 12px;
+    padding: 25px; 
+    margin: 20px auto; 
+    background-color: #1a1a1a;
+    box-shadow: 0 0 15px rgba(112, 0, 255, 0.4);
+    width: 90%;
+    max-width: 600px;
+}
+
+.product-info-display { 
+    display: flex;
+    align-items: center;
+    margin-right: 20px; 
+}
+
+.li-listados img {
+    width: 80px; 
+    height: auto; 
+    margin-right: 20px; 
+    border-radius: 8px;
+    object-fit: contain; 
+}
+
+#deleteProduct_button {
+    background-color: #DC3545; 
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 0 10px rgba(220, 53, 69, 0.5); 
+    white-space: nowrap; 
+}
+
+#deleteProduct_button:hover {
+    background-color: #C82333;
+    box-shadow: 0 0 15px rgba(220, 53, 69, 0.8);
 }

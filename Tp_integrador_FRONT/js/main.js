@@ -1,30 +1,25 @@
-// main.js - VERSIÓN FINAL INTEGRADA
+// main.js - VERSIÓN FINAL INTEGRADA CON CONTADOR ACTUALIZABLE
 
 // 1. VARIABLES GLOBALES
 let frutasTienda = []; 
 let listaParaOrdenar = []; 
 let carrito = [];
 
-// Elementos del DOM (Verificamos que existan para no tener errores)
+// Elementos del DOM
 const contenedorProductos = document.getElementById("contenedor-productos");
 const contenedorCarrito = document.getElementById("contenedor-carrito");
 const barraBusqueda = document.getElementById("barra-busqueda");
 const contadorCarrito = document.getElementById("contador-carrito");
 
 // ------------------------------------------------------
-// 2. CONEXIÓN CON EL SERVIDOR (El código nuevo)
+// 2. CONEXIÓN CON EL SERVIDOR
 // ------------------------------------------------------
 async function obtenerProductos() {
     try {
-        // Usamos la ruta correcta del backend
         let respuesta = await fetch("http://localhost:3000/api/products"); 
-        
         let respuestaFormato = await respuesta.json(); 
-        
-        // Sacamos la lista del payload
         let productos = respuestaFormato.payload; 
 
-        // GUARDAMOS EN LAS VARIABLES GLOBALES
         frutasTienda = productos;
         listaParaOrdenar = frutasTienda.slice(); 
 
@@ -37,14 +32,13 @@ async function obtenerProductos() {
 }
 
 // ------------------------------------------------------
-// 3. TUS FUNCIONES (El cerebro)
+// 3. FUNCIONES PRINCIPALES
 // ------------------------------------------------------
 
 function mostrarLista(productos) {
     let htmlProductos = "";
 
     productos.forEach(prod => {
-        // FUSION: Usamos 'prod.imagen' (backend) pero agregamos el botón del carrito
         htmlProductos += `
             <div class="card-producto">
                 <img src="${prod.imagen}" alt="${prod.nombre}">
@@ -60,7 +54,6 @@ function mostrarLista(productos) {
 
 // --- CARRITO ---
 function agregarACarrito(idFruta) {
-    // Buscamos por ID (comparación flexible == por si uno es string y otro número)
     let frutaSeleccionada = frutasTienda.find(fruta => fruta.id == idFruta);
 
     if (frutaSeleccionada) {
@@ -82,38 +75,57 @@ function vaciarCarrito() {
 function actualizarCarritoStorage() {
     localStorage.setItem("carrito", JSON.stringify(carrito));
     mostrarCarrito();
+    actualizarContadorCarrito(); // ← ACTUALIZA EL CONTADOR
+}
+
+//  FUNCIÓN NUEVA: Actualizo el contador del carrito
+function actualizarContadorCarrito() {
+    const contadorCarrito = document.getElementById("contador-carrito");
+    if (contadorCarrito) {
+        const cantidad = carrito.length;
+        contadorCarrito.innerHTML = `🛒 Carrito: ${cantidad} productos`;
+    }
 }
 
 function mostrarCarrito() {
-    if (!contenedorCarrito) return; 
-
-    let htmlCarrito = "<ul>";
-    let total = 0;
-
-    carrito.forEach(function(fruta, index) {
-        htmlCarrito += `
-            <li>
-                ${fruta.nombre} - $${fruta.precio}
-                <button class="boton-eliminar" onclick="eliminarDelCarrito(${index})">Eliminar</button>
-            </li>
+    const contenedorCarrito = document.getElementById('contenedor-carrito');
+    
+    if (carrito.length === 0) {
+        contenedorCarrito.innerHTML = `
+            <h2>🛒 Carrito de Compras</h2>
+            <p>El carrito está vacío</p>
         `;
-        total += fruta.precio;
-    });
-
-    if (carrito.length > 0) {
-        htmlCarrito += "</ul>"; 
-        htmlCarrito += `
-            <div class="carrito-footer">
-                <button id="vaciar-carrito" class="boton-eliminar" onclick="vaciarCarrito()">Vaciar carrito</button>
-                <p>Total: $${total}</p>
+        return;
+    }
+    
+    let html = '<h2>🛒 Carrito de Compras</h2>';
+    
+    // Items del carrito
+    carrito.forEach((item, index) => {
+        html += `
+            <div class="bloque-item">
+                <span>${item.nombre} - $${item.precio}</span>
+                <button class="boton-eliminar" onclick="eliminarDelCarrito(${index})">
+                    Eliminar
+                </button>
             </div>
         `;
-    } else {
-        htmlCarrito = "<p>Carrito vacío</p>";
-    }
-
-    contenedorCarrito.innerHTML = htmlCarrito;
-    if(contadorCarrito) contadorCarrito.innerText = `Carrito: ${carrito.length} producto${carrito.length !== 1 ? "s" : ""}`;
+    });
+    
+    // Total y botón vaciar
+    const total = carrito.reduce((sum, item) => sum + item.precio, 0);
+    html += `
+        <div class="carrito-acciones">
+            <button id="vaciar-carrito" onclick="vaciarCarrito()">
+                Vaciar carrito
+            </button>
+            <div class="total-carrito-interno">
+                Total: $${total}
+            </div>
+        </div>
+    `;
+    
+    contenedorCarrito.innerHTML = html;
 }
 
 // --- FILTROS Y ORDENAMIENTO ---
@@ -152,12 +164,16 @@ function init() {
     const navAlumno = document.getElementById("nav-alumno");
     if(navAlumno) navAlumno.innerHTML = "<p>Nicolás Macri</p>";
 
-    // Recuperar carrito
+    // Recuperar carrito del localStorage
     const carritoGuardado = localStorage.getItem("carrito");
     if (carritoGuardado) {
         carrito = JSON.parse(carritoGuardado);
         mostrarCarrito();
     }
+
+    
+    // Actualizar contador al inicio
+    actualizarContadorCarrito();
 
     // Llamada al servidor
     obtenerProductos();

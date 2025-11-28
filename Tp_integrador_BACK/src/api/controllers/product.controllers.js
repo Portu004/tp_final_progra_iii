@@ -4,16 +4,14 @@
 
 import ProductModel from "../models/product.models.js";
 
-// Get all products -> Traer todos los productos
+
 export const getAllProducts = async (req, res) => {
 
     try {
 
-        // Con rows extraemos exclusivamente los datos que solicitamos en la consulta
+        
         const [rows] = await ProductModel.selectAllProducts();
 
-        // Comprobamos que se reciban correctamente los productos
-        //console.log(rows);
         
         res.status(200).json({
             payload: rows,
@@ -31,30 +29,22 @@ export const getAllProducts = async (req, res) => {
 }
 
 
-// Get product by id -> Traer producto por id
+
 export const getProductById = async (req, res) => {
 
     try {
-        // let id = req.params.id;
-        let { id } = req.params; // Aca extraemos el valor "2" de localhost:3000/products/2
+        
+        let { id } = req.params; 
 
-        /* Logica exportada al middleware validateId
-        // Optimizacion 1: Validacion de parametros antes de acceder a la BBDD para evitar hacer una consulta donde el parametro id no sea valido
-        if(!id || isNaN(Number(id))) {
-            return res.status(400).json({
-                message: "El id del producto debe ser un numero valido"
-            })
-        }
-        */
 
         let [rows] = await ProductModel.selectProductWhereId(id);
         
-        // Optimizacion 3: Comprobamos que exista el producto con ese id
+
         if(rows.length === 0) {
-            // Este console.log es desde la consola del servidor
+    
             console.log(`Error! No se encontro producto con id ${id}`);
 
-            // Esta respuesta se la brindamos al usuario y puede elegir verla por consola o por pantalla
+            
             return res.status(404).json({
                 message: `No se encontro producto con id ${id}`
             });
@@ -82,11 +72,7 @@ export const getProductById = async (req, res) => {
 export const createProduct = async (req, res) => {
 
     try {
-        /*  image: "johnnymelavo.com"
-            name: "Johnny Melavo"
-            price: "12"
-            type: "CD"
-        */
+      
 
         // Gracias al destructuring, recogemos estos datos del body
         let { image, name, price, type } = req.body;

@@ -72,6 +72,11 @@ function vaciarCarrito() {
     actualizarCarritoStorage();
 }
 
+function saludarclienteStorage() {
+    const nombre = localStorage.getItem("clienteNombre");
+    document.getElementById("datos-alumno").textContent = "👋 Bienvenido " + nombre;
+}
+
 function actualizarCarritoStorage() {
     localStorage.setItem("carrito", JSON.stringify(carrito));
     mostrarCarrito();
@@ -161,6 +166,8 @@ if(btnOrdPrecio) {
 // ------------------------------------------------------
 function init() {
     // Datos alumno
+    saludarclienteStorage();
+    
     const navAlumno = document.getElementById("nav-alumno");
     if(navAlumno) navAlumno.innerHTML = "<p>Nicolás Macri</p>";
 

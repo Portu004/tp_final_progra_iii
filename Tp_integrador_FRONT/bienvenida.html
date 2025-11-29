@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenido - ElectroTech</title>
+    <link rel="stylesheet" href="css/bienvenida.css">
+    <link rel="icon" type="image/png" href="img/icono-robot.png">
+    <script defer src="js/bienvenida.js"></script>
+</head>
+
+<body>
+    <nav>
+        <div class="logo-container">
+            <img src="img/logo-final.png" alt="ElectroTech">
+        </div>
+
+        <h2 class="titulo-bienvenida">Bienvenido a ElectroTech</h2>
+
+        <div></div> <!-- Esto mantiene centrado el título -->
+    </nav>
+
+
+    <main class="main-container">
+        <div class="card-bienvenida">
+            <h1>¡Hola! 👋</h1>
+            <p>Ingresá tu nombre para comenzar</p>
+
+            <form id="form-bienvenida" action="cliente.html">
+                <input 
+                    type="text" 
+                    id="nombre" 
+                    placeholder="Tu nombre..." 
+                    required
+                >
+
+                <button type="submit">Continuar</button>
+            </form>
+        </div>
+    </main>
+</body>
+</html>

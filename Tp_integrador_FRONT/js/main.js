@@ -1,7 +1,7 @@
 // main.js - VERSIÓN FINAL INTEGRADA CON CONTADOR ACTUALIZABLE
 
 // 1. VARIABLES GLOBALES
-let frutasTienda = []; 
+let productosTienda = []; 
 let listaParaOrdenar = []; 
 let carrito = [];
 
@@ -20,11 +20,11 @@ async function obtenerProductos() {
         let respuestaFormato = await respuesta.json(); 
         let productos = respuestaFormato.payload; 
 
-        frutasTienda = productos;
-        listaParaOrdenar = frutasTienda.slice(); 
+        productosTienda = productos;
+        listaParaOrdenar = productosTienda.slice(); 
 
-        console.log("Productos cargados:", frutasTienda);
-        mostrarLista(frutasTienda); 
+        console.log("Productos cargados:", productosTienda);
+        mostrarLista(productosTienda); 
 
     } catch (error) {
         console.error("Error al conectar:", error);
@@ -53,11 +53,11 @@ function mostrarLista(productos) {
 }
 
 // --- CARRITO ---
-function agregarACarrito(idFruta) {
-    let frutaSeleccionada = frutasTienda.find(fruta => fruta.id == idFruta);
+function agregarACarrito(idProduc) {
+    let productoSeleccionado = productosTienda.find(producto => producto.id == idProduc);
 
-    if (frutaSeleccionada) {
-        carrito.push(frutaSeleccionada);
+    if (productoSeleccionado) {
+        carrito.push(productoSeleccionado);
         actualizarCarritoStorage();
     }
 }
@@ -131,8 +131,8 @@ function mostrarCarrito() {
 // --- FILTROS Y ORDENAMIENTO ---
 function filtrarProducto() {
     let valorBusqueda = barraBusqueda.value.toLowerCase();
-    let productosFiltrados = frutasTienda.filter(fruta => 
-        fruta.nombre.toLowerCase().includes(valorBusqueda)
+    let productosFiltrados = productosTienda.filter(producto => 
+        producto.nombre.toLowerCase().includes(valorBusqueda)
     );
     mostrarLista(productosFiltrados);
 }

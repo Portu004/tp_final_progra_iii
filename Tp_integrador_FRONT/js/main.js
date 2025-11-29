@@ -131,7 +131,7 @@ function mostrarCarrito() {
 // --- FILTROS Y ORDENAMIENTO ---
 function filtrarProducto() {
     let valorBusqueda = barraBusqueda.value.toLowerCase();
-    let productosFiltrados = productosTienda.filter(fruta => 
+    let productosFiltrados = productosTienda.filter(producto => 
         producto.nombre.toLowerCase().includes(valorBusqueda)
     );
     mostrarLista(productosFiltrados);

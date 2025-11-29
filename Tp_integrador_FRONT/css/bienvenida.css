@@ -1,0 +1,101 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background-color: #250734;
+}
+
+/* Nav igual que cliente.html */
+nav { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 0px 60px; 
+    background: linear-gradient(135deg, #1a0525 0%, #2d0a45 50%, #4a0e6e 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(138, 43, 226, 0.3);
+}
+
+nav .logo-container img {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+}
+
+.titulo-bienvenida {
+    font-size: 32px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #fff 0%, #f093fb 100%);
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+}
+
+
+.main-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+}
+
+/* Tarjeta central */
+.card-bienvenida {
+    background: black;
+    border: 2px solid purple;
+    padding: 40px;
+    border-radius: 12px;
+    text-align: center;
+    width: 400px;
+    box-shadow: 0 8px 30px rgba(128, 0, 128, 0.8);
+}
+
+.card-bienvenida h1 {
+    color: #f093fb;
+    margin-bottom: 15px;
+}
+
+.card-bienvenida p {
+    color: white;
+    font-size: 18px;
+    margin-bottom: 25px;
+}
+
+/* Input */
+.card-bienvenida input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #764ba2;
+    border-radius: 10px;
+    font-size: 16px;
+    margin-bottom: 20px;
+    background: rgba(255,255,255,0.9);
+}
+
+.card-bienvenida input:focus {
+    outline: none;
+    border-color: #f093fb;
+    box-shadow: 0 0 10px rgba(240, 147, 251, 0.5);
+}
+
+/* Botón */
+.card-bienvenida button {
+    width: 100%;
+    padding: 12px;
+    background: purple;
+    border: none;
+    color: #d7cedc;
+    font-size: 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.card-bienvenida button:hover {
+    background: #490a6a;
+    transform: translateY(-3px);
+}

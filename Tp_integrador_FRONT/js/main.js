@@ -54,7 +54,7 @@ function mostrarLista(productos) {
 
 // --- CARRITO ---
 function agregarACarrito(idProduc) {
-    let productoSeleccionado = productosTienda.find(fruta => producto.id == idProduc);
+    let productoSeleccionado = productosTienda.find(producto => producto.id == idProduc);
 
     if (productoSeleccionado) {
         carrito.push(productoSeleccionado);

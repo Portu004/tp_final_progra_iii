@@ -13,18 +13,18 @@ import { join, __dirname } from "./src/api/utils/index.js";
 import connection from "./src/api/database/db.js";
 
 import session from "express-session";
-
+/* guarda la info mientras navega el usuario/*
 /*====================
     Middlewares
 ====================*/
 app.use(cors()); //Middleware CORS basico que permite todas las solicitudes
 app.use(express.json()); // Middleware que transforma el JSON de las peticiones POST y PUT a objetos JS
-app.use(loggerUrl);
+app.use(loggerUrl); //Middleware que imprime la info de cada peticion
 
 
 
 // Middleware para servir archivos estaticos
-app.use(express.static(join(__dirname, "src/public"))); // Vamos a construir la ruta relativa para servir los archivos de la carpeta /public
+app.use(express.static(join(__dirname, "src/public"))); // La ruta que permite servir los archivos de la carpeta /public
 
 app.use(session({
     secret: SESSION_KEY,
@@ -38,8 +38,8 @@ app.use(express.urlencoded({
 /*=====================
     Configuracion
 ====================*/
-app.set("view engine", "ejs"); // Configuramos EJS como motor de plantillas
-app.set("views", join(__dirname, "src/views")); // Indicamos la ruta de las vistas en nuestro proyecto
+app.set("view engine", "ejs"); // Definimos EJS como motor de plantillas
+app.set("views", join(__dirname, "src/views")); // Es la ruta de las vistas de nuestro proyecto
 
 
 
@@ -60,7 +60,7 @@ app.use("/api/products", productRoutes);
 
 app.use("/", viewRoutes);
 
-
+// ENDPOINT crear usuario
 app.post("/api/users", async (req, res) => {
 try {
         const { correo, contrasenia } = req.body;
@@ -103,7 +103,7 @@ app.post("/login", async (req, res) => {
                 error: "Todos los campos son obligatorios!"
             });
         }
-
+        // busca el usuario en la BD
         const sql = `SELECT * FROM usuarios where correo = ? AND contrasenia = ?`;
         const [rows] = await connection.query(sql, [correo, contrasenia]);
 

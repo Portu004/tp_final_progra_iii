@@ -267,19 +267,7 @@ nav .search-container {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-/* Responsive */
+/* Responsive  media-query*/
 @media (max-width: 1200px) {
     .card-producto {
         width: 23%;

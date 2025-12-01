@@ -1,7 +1,7 @@
 /*===============================
     Controladores productos
 ===============================*/
-
+/*   LOGICA DEL NEGOCIO*/
 import ProductModel from "../models/product.models.js";
 
 
@@ -73,7 +73,6 @@ export const createProduct = async (req, res) => {
 
     try {
       
-
         // Gracias al destructuring, recogemos estos datos del body
         let { image, name, price, type } = req.body;
         console.log(req.body);
@@ -156,7 +155,7 @@ export const removeProduct = async (req, res) => {
         console.log(result);
 
         // Optimizacion 2: Testeamos que se borro, esto lo sabemos gracias a affectedRows que devuelve result
-        if(result.affectedRows === 0) { // No se borro nada
+        if(result.affectedRows === 0) { // No se borró porque no habia nada
             return res.status(400).json({
                 message: "No se eliminó el producto"
             });

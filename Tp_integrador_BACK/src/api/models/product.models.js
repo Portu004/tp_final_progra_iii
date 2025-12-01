@@ -6,21 +6,16 @@ import connection from "../database/db.js"; // Importamos la conexion a la BBDD
 
 // Trae todos los productos
 const selectAllProducts = () => {
-    // Optimizacion 1: Seleccionar solamente los campos necesarios, evitar SELECT *
     // La idea es devolver solo las columnas que necesita el front: - datos transferidos, - carga de red, + seguridad
     const sql = "SELECT * FROM productos";
 
-    // Con rows extraemos exclusivamente los datos que solicitamos en la consulta
     return connection.query(sql);
 }
 
 // Selecciona producto por id
 const selectProductWhereId = (id) => {
     // Gracias al uso de los placeholders -> ? evitamos ataques de inyeccion SQL
-    //let sql = `SELECT * FROM productos WHERE productos.id = ${id}`; // Opcion 1. Consulta no segura
-    let sql = "SELECT * FROM productos WHERE productos.id = ?"; // Opcion 2, sentencia mas segura
-
-    //let [rows] = await connection.query(sql); // Aca introducimos la consulta 1 no segura
+    let sql = "SELECT * FROM productos WHERE productos.id = ?"; // Es la sentencia mas segura
 
     // Optimizacion 2: Limitar los resultados de la consulta
     return connection.query(sql, [id]); // Este id reemplazara el placeholder ?

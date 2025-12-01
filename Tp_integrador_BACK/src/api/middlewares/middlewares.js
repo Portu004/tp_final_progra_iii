@@ -7,7 +7,6 @@ const loggerUrl = (req, res, next) => {
     next();
 }
 
-
 // Middleware de ruta -> Se aplica a rutas especificas
 const validateId = (req, res, next) => {
     let { id } = req.params;

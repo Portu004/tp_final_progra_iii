@@ -225,3 +225,119 @@ a:hover{
     box-shadow: 0 0 5px rgba(72, 29, 119, 0.8); 
     transform: translateY(0); 
 }
+
+
+#forms-wrapper {
+    display: flex;             
+    justify-content: center;   
+    align-items: flex-start;   
+    gap: 40px;                 
+    padding: 30px 0;
+    max-width: 1200px;         
+    margin: 0 auto;            
+    flex-wrap: wrap;           
+}
+
+
+.admin-form {
+    width: 400px; 
+    padding: 25px;
+    margin: 15px 0;
+    border-radius: 12px;
+    background-color: #1a1a1a; 
+    border: 1px solid #6a1b9a; 
+    box-shadow: 0 0 15px rgba(106, 27, 154, 0.4); 
+}
+
+.admin-form h2 {
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 1.8em;
+    border-bottom: 2px solid #8a3ffc;
+    padding-bottom: 10px;
+}
+
+/* --- Estilos de Inputs y Selects --- */
+.admin-form label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    color: #cccccc;
+    font-weight: 500;
+}
+
+.admin-form input[type="text"],
+.admin-form input[type="number"],
+.admin-form input[type="email"],
+.admin-form input[type="password"],
+.admin-form select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #333333;
+    border-radius: 6px;
+    background-color: #0d0d0d;
+    color: #f0f0f0;
+    font-size: 1em;
+    box-sizing: border-box; /* Importante para que el padding no añada ancho */
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.admin-form input:focus,
+.admin-form select:focus {
+    border-color: #8a3ffc;
+    outline: none;
+    box-shadow: 0 0 8px rgba(138, 63, 252, 0.6);
+}
+
+
+.admin-form input[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    margin-top: 30px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: background-color 0.3s, box-shadow 0.3s, transform 0.2s;
+    font-size: 20px;
+}
+
+.submit-product {
+    background-color: #8a3ffc;
+    color: #ffffff;
+    box-shadow: 0 0 10px rgba(138, 63, 252, 0.5);
+}
+
+.submit-product:hover {
+    background-color: #ab6cfd;
+    box-shadow: 0 0 15px #ab6cfd;
+    transform: translateY(-1px);
+}
+
+.submit-user {
+    background-color: #00bcd4; 
+    color: #ffffff; 
+    box-shadow: 0 0 10px rgba(0, 188, 212, 0.7);
+}
+
+.submit-user:hover {
+    background-color: #26d2e6;
+    box-shadow: 0 0 15px #26d2e6;
+    transform: translateY(-1px);
+}
+
+/* --- Responsivee--- */
+@media (max-width: 950px) {
+    #forms-wrapper {
+        flex-direction: column; 
+        align-items: center;
+        gap: 20px;
+    }
+    .admin-form {
+        width: 90%; 
+        max-width: 450px;
+    }
+}

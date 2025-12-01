@@ -121,16 +121,56 @@ a:hover{
 }
 
 #getProduct-form {
-    margin-bottom: 20px;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    max-width: 650px; 
+    margin: 0px auto 30px auto;
+    background-color: #1a1a1a;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(112, 0, 255, 0.1);
 }
 
-#idProd{
+#getProduct-form label {
+    margin-right: 15px;
+    font-size: 18px;
+    color: #E0E0E0;
+}
+
+#idProd {
     background-color: #2b2b2b;
-    border-color: #483561;
-    cursor: pointer;
+    border: 1px solid #7000FF;
     color: white;
-    border-radius: 4px;
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 8px;
+    width: 100px; 
+    text-align: center;
+    transition: box-shadow 0.3s ease;
+}
+
+#idProd:focus {
+    outline: none;
+    box-shadow: 0 0 8px rgba(112, 0, 255, 0.6);
+}
+
+
+#getProduct-form input[type="submit"] {
+    background-color: #7000FF;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    margin-left: 15px;
+}
+
+#getProduct-form input[type="submit"]:hover {
+    background-color: #9933FF;
+    box-shadow: 0 0 15px rgba(112, 0, 255, 0.8);
 }
 
 

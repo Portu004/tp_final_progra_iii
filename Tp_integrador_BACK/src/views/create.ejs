@@ -1,36 +1,54 @@
 <%- include("partials/head.ejs") %>
 <%- include("partials/nav.ejs") %>
-    <link rel="stylesheet" href="css/crear.css">
-    <main>
-        <h1>Crear producto</h1>
-        <div class="contenedor-logo">
-        <img src="img/logo-final.png" id="logo-pagina">
+<link rel="stylesheet" href="css/crear.css">
+<main>
+    <h1>Administración del Local</h1> 
+    <div class="contenedor-logo">
+    <img src="img/logo-final.png" id="logo-pagina">
+    </div>
+    <hr>
+
+        <div id="forms-wrapper">
+
+            <form id="altaProducts-form" class="admin-form">
+                <h2>Crear Producto</h2> 
+
+                <label for="nameProd">Nombre</label>
+                <input type="text" name="name" id="nameProd" required>
+
+                <label for="imageProd">Url imagen</label>
+                <input type="text" name="image" id="imageProd" required>
+
+                <label for="typeProd">Categoria</label>
+                <select name="type" id="typeProd" required>
+                    <option value="CEL">Celular</option>
+                    <option value="AUR">Auricular</option>
+                    <option value="CAR">Cargador</option>
+                </select>
+
+                <label for="priceProd">Precio</label>
+                <input type="number" name="price" id="priceProd" required>
+
+                <input type="submit" value="Crear producto" class="submit-product">
+            </form>
+
+
+            <form id="altaUsers-container" class="admin-form">
+                <h2>Alta Usuarios</h2> 
+        
+                <label for="correoUser">Correo</label>
+                <input type="email" name="correo" id="correoUser" required>
+        
+                <label for="passwordUser">Password</label>
+                <input type="password" name="password" id="passwordUser" required>
+        
+                <input type="submit" value="Crear usuario" class="submit-user">
+            </form>
+
         </div>
-        <hr>
-        <form id="altaProducts-form">
-
-            <label for="nameProd">Nombre</label>
-            <input type="text" name="name" id="nameProd" required>
-
-            <label for="imageProd">Url imagen</label>
-            <input type="text" name="image" id="imageProd" required>
-
-            <label for="typeProd">Categoria</label>
-            <select name="type" id="typeProd" required>
-                <option value="CEL">Celular</option>
-                <option value="AUR">Auricular</option>
-                <option value="CAR">Cargador</option>
-            </select>
-
-            <label for="priceProd">Precio</label>
-            <input type="number" name="price" id="priceProd" required>
-
-            <br>
-            <input type="submit" value="Crear producto">
-        </form>
-
+        
         <div id="contenedor-productos"></div>
-    </main>
+</main>
 
 <script src="js/create.js"></script>
 

@@ -15,7 +15,7 @@ input {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
 
-/* Header con gradiente morado */
+/* Header con gradiente */
 nav { 
     display: flex; 
     justify-content: space-between; 
@@ -34,14 +34,14 @@ nav .logo-container img {
 }
 
 
-/* Contenedor central con búsqueda */
+
 nav .search-container {
     display: flex;
     align-items: center;
     gap: 15px;
 }
 
-/* Barra de búsqueda mejorada */
+
 #barra-busqueda {
     padding: 12px 24px;
     border: 2px solid #764ba2;
@@ -58,7 +58,7 @@ nav .search-container {
     border-color: #f093fb;
     background: white;
     box-shadow: 0 4px 20px rgba(240, 147, 251, 0.4);
-    transform: scale(1.02); /* hace que se agrande*/
+    transform: scale(1.02); 
     width: 420px;
 }
 
@@ -153,7 +153,6 @@ nav .search-container {
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
-/* Efecto hover  LO ELEVA */
 .card-producto:hover {
     transform: translateY(-10px);
     box-shadow: 0 8px 30px rgba(128, 0, 128, 1); 
@@ -290,7 +289,7 @@ nav .search-container {
 
 
 
-/* Responsive  media-query*/
+/* Responsive */
 @media (max-width: 1200px) {
     .card-producto {
         width: 23%;

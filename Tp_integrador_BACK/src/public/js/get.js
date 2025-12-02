@@ -8,13 +8,13 @@ getProduct_form.addEventListener("submit", async (event) => {
     event.preventDefault(); // Evitamos el envio por defecto del formulario
 
     console.log("Formulario no enviado");
-    console.log(event.target); // Con event target accedemos al evento que disparo el addEventListener
+    console.log(event.target); 
    
-    // Vamos a guardar como objetos los valores del formulario HTML
+    //guardamos como objetos los valores del formulario HTML
     let formData = new FormData(event.target);
     console.log(formData); // FormData { idProd → "2" }
     
-    // Vamos a transformar este objeto FormData en un objeto normal JavaScript
+    //transformamos este objeto FormData en un objeto normal JavaScript
     let data = Object.fromEntries(formData.entries());
     console.log(data); // Object { idProd: "3" }
     
@@ -25,7 +25,6 @@ getProduct_form.addEventListener("submit", async (event) => {
     
     try {
         console.log(`Haciendo peticion GET a la url: ${url}/${idProd}`)
-        //let respuesta = await fetch(`${url}/${idProd}`);
         let respuesta = await fetch(`http://localhost:3000/api/products/${idProd}`);
         console.log(respuesta);
 
@@ -34,7 +33,7 @@ getProduct_form.addEventListener("submit", async (event) => {
 
         if(respuesta.ok) {
             console.log(datos.payload); // [{…}]
-            console.log(datos.payload[0]); // {id: 1, nombre: 'La maquina de hacer pajaros - Peliculas', tipo: 'LP', precio: 10000, imagen: 'https://i.discogs.com/rKa1bYXYX2w5nIGDULFozlTjVbmM…y9SLTM1MDY2/NjctMTUwOTczNTA0/Ni01NzM4LmpwZWc.jpeg', …}
+            console.log(datos.payload[0]); 
 
             let producto = datos.payload[0];
 

@@ -27,14 +27,13 @@ let getProduct_form = document.getElementById("getProduct-form");
             
             try {
                 console.log(`Haciendo peticion GET a la url: ${url}/${idProd}`)
-                //let respuesta = await fetch(`${url}/${idProd}`);
                 let respuesta = await fetch(`http://localhost:3000/api/products/${idProd}`);
 
                 let datos = await respuesta.json();
 
                 console.log(datos); // {payload: Array(1), message: 'Producto encontrado'}
                 console.log(datos.payload); // [{…}]
-                console.log(datos.payload[0]); // {id: 1, nombre: 'La maquina de hacer pajaros - Peliculas', tipo: 'LP', precio: 10000, imagen: 'https://i.discogs.com/rKa1bYXYX2w5nIGDULFozlTjVbmM…y9SLTM1MDY2/NjctMTUwOTczNTA0/Ni01NzM4LmpwZWc.jpeg', …}
+                console.log(datos.payload[0]); 
 
                 let producto = datos.payload[0];
 
@@ -114,8 +113,6 @@ let getProduct_form = document.getElementById("getProduct-form");
             updateProducts_form.addEventListener("submit", async event => {
                 
                 event.preventDefault(); // Prevengo el envio por defecto del formulario
-
-                // console.log(event.target); // Aca selecciono el formulario de actualizacion que acabo de crear
 
                 // Transformo en un objeto FormData toda la data del nuevo formulario de actualizacion
                 let formData = new FormData(event.target);

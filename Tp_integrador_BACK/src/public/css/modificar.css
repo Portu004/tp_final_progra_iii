@@ -235,7 +235,7 @@ a:hover{
     border-radius: 5px;
     background-color: #2b2b2b;
     color: white; 
-    font-size: 1em;
+    font-size: 15px;
     box-sizing: border-box; 
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
@@ -256,7 +256,7 @@ a:hover{
     border: none;
     border-radius: 5px;
     padding: 12px 25px;
-    font-size: 1.1em;
+    font-size: 20px;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
     width: 100%; 

@@ -1,4 +1,4 @@
-// Middleware de aplicacion -> Se aplica a todas las rutas
+// Middleware de aplicacion 
 // Middleware logger para mostrar por consola todas las peticiones a nuestro servidor
 const loggerUrl = (req, res, next) => {
     console.log(`[${new Date().toLocaleString()}] ${req.method} ${req.url}`);

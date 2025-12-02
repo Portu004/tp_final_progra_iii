@@ -26,19 +26,18 @@ getProduct_form.addEventListener("submit", async (event) => {
     
     try {
         console.log(`Haciendo peticion GET a la url: ${url}/${idProd}`)
-        //let respuesta = await fetch(`${url}/${idProd}`);
         let respuesta = await fetch(`http://localhost:3000/api/products/${idProd}`);
 
         let datos = await respuesta.json();
 
         console.log(datos); // {payload: Array(1), message: 'Producto encontrado'}
         console.log(datos.payload); // [{…}]
-        console.log(datos.payload[0]); // {id: 1, nombre: 'La maquina de hacer pajaros - Peliculas', tipo: 'LP', precio: 10000, imagen: 'https://i.discogs.com/rKa1bYXYX2w5nIGDULFozlTjVbmM…y9SLTM1MDY2/NjctMTUwOTczNTA0/Ni01NzM4LmpwZWc.jpeg', …}
+        console.log(datos.payload[0]); 
 
         let producto = datos.payload[0];
         console.table(producto);
 
-        // Corregido: Un solo <li> para contener la tarjeta completa y el botón.
+    
     let htmlProducto = `
     <li class="li-listados">
         
@@ -51,14 +50,12 @@ getProduct_form.addEventListener("submit", async (event) => {
     </li>
     `;
 
-// Nota: He mantenido el ID del botón como "deleteProduct_button" (basado en tu código JS original) 
-// y he añadido un <div> con clase "product-info-display" para agrupar imagen y texto.
 
         // Renderizamos el listado en la pagina
         listaProductos.innerHTML = htmlProducto;
 
 
-        // Vamos a asignarle un evento click a nuestro boton "Eliminar producto"
+        
         let deleteProduct_button = document.getElementById("deleteProduct_button");
 
         deleteProduct_button.addEventListener("click", event => {

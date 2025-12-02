@@ -18,7 +18,7 @@ router.get("/:id", validateId, getProductById);
 // POST -> Crear un nuevo producto
 router.post("/", createProduct);
 
-// TO DO, Optimizacion II -> actualizar solo los campos que hayan cambiado
+
 // UPDATE -> Actualizar un producto por su id
 router.put("/", updateProduct);
 

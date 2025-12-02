@@ -10,14 +10,14 @@
         <hr>
         <div id="contenedor-productos">
             <!-- Vamos a iterar el array de productos que le pasamos desde el endpoint -->
-             <% productos.forEach(prod => { %>
+            <% productos.forEach(prod => { %>
                 <div class="card-producto">
                     <img src="<%= prod.imagen %>" alt="<%= prod.nombre %>">
                     <h5><%= prod.nombre %></h5>
                     <p>Id: <%= prod.id %></p>
                     <p>$<%= prod.precio %></p>
                 </div>
-             <% }) %>
+            <% }) %>
         </div>
     </main>
     

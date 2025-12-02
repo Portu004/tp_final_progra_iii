@@ -44,9 +44,7 @@ const updateProduct = (name, image, type, price, active, id) => {
 const deleteProduct = (id) => {
     // Opcion 1: Borrado normal
     let sql = "DELETE FROM productos WHERE id = ?";
-
-    // Opcion 2: Baja logica
-    //let sql = "UPDATE productos set active = 0 WHERE id = ?";
+    
     return connection.query(sql, [id]);
 }
 

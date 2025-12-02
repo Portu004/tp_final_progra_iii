@@ -24,7 +24,7 @@ app.use(loggerUrl); //Middleware que imprime la info de cada peticion
 
 
 // Middleware para servir archivos estaticos
-app.use(express.static(join(__dirname, "src/public"))); // La ruta que permite servir los archivos de la carpeta /public
+app.use(express.static(join(__dirname, "src/public"))); 
 
 app.use(session({
     secret: SESSION_KEY,
@@ -39,7 +39,7 @@ app.use(express.urlencoded({
     Configuracion
 ====================*/
 app.set("view engine", "ejs"); // Definimos EJS como motor de plantillas
-app.set("views", join(__dirname, "src/views")); // Es la ruta de las vistas de nuestro proyecto
+app.set("views", join(__dirname, "src/views")); // ruta de las vistas de nuestro proyecto
 
 
 
@@ -107,7 +107,6 @@ app.post("/login", async (req, res) => {
         const sql = `SELECT * FROM usuarios where correo = ? AND contrasenia = ?`;
         const [rows] = await connection.query(sql, [correo, contrasenia]);
 
-        // Si no existen usuarios con ese correo o password
         if(rows.length === 0) {
             return res.render("login", {
                 error: "Credenciales incorrectas!"

@@ -1,4 +1,7 @@
 // main.js - VERSIÓN FINAL INTEGRADA CON CONTADOR ACTUALIZABLE
+let nombreUsuario = sessionStorage.getItem("nombreUsuario");
+
+
 saludarclienteStorage();
 // 1. VARIABLES GLOBALES
 let productosTienda = []; 
@@ -63,6 +66,68 @@ function mostrarLista(productos) {
 
     if(contenedorProductos) contenedorProductos.innerHTML = htmlProductos;
 }
+
+async function registrarVenta(precioTotal, idProductos) {
+    try {
+        // let nombreUsuario = sessionStorage.getItem("nombreUsuario");
+
+        const fecha = new Date();
+
+        // Visualizamos por consola todos los datos que le mandaremos al endpoint /api/sales
+        console.log(fecha);         // Mon Dec 01 2025 22:01:57 GMT-0300 (Argentina Standard Time)
+        console.log(nombreUsuario); // Gabi
+        console.log(precioTotal);   // 1550
+        console.log(idProductos);   // [ 13, 12, 11 ]
+
+        // Formato MySQL para timestamp
+        // Tenemos que formatear la fecha para que la acepte mysql
+        const fechaFormato = fecha.toISOString().slice(0, 19).replace("T", " "); // MySQL no acepta fechas en formato ISO con milisegundos ni con la Z
+
+        console.log(fechaFormato); // 2025-12-02 01:07:10
+        
+
+        
+        // Preparamos en el objeto data la informacion que le enviaremos al endpoint /api/sales en formato JSON en nuestra peticion POST
+        const data = {
+            nombreUsuario: nombreUsuario,
+            precioTotal: precioTotal,
+            fechaEmision: fechaFormato,
+            productos: idProductos
+        }
+
+        const response = await fetch("http://localhost:3000/api/sales", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        });
+
+        const result = await response.json();
+
+        if(response.ok) {
+            console.log("Venta registrada: ", result);
+            alert(result.message);
+
+            // Limpieza y redireccion
+            sessionStorage.removeItem("nombreUsuario"); // Eliminamos el nombre de usuario 
+            // sessionStorage.removeItem("carrito")
+            window.location.href = "cliente.html";
+
+        } else {
+            console.error(result);
+            alert("Error en la venta: " + result.message)
+        }
+
+
+
+    } catch (error) {
+        console.error("Error al enviar los datos", error);
+        alert("Error al registrar la venta");
+    }
+}
+
+
 
 // --- CARRITO ---
 function agregarACarrito(idProduc) {
@@ -207,7 +272,7 @@ boton_imprimir.addEventListener("click", imprimirTicket);
 
         doc.save("ticket.pdf");
 
-
+        registrarVenta(precioTotal, idProductos)
     }
 
 
@@ -224,8 +289,6 @@ function init() {
     // Datos alumno
     saludarclienteStorage();
     
-    const navAlumno = document.getElementById("nav-alumno");
-    if(navAlumno) navAlumno.innerHTML = "<p>Nicolás Macri</p>";
 
     // Recuperar carrito del localStorage
     const carritoGuardado = localStorage.getItem("carrito");

@@ -74,17 +74,17 @@ export const createProduct = async (req, res) => {
     try {
       
         // Gracias al destructuring, recogemos estos datos del body
-        let { image, name, price, type } = req.body;
+        let { imagen, nombre, precio, tipo } = req.body;
         console.log(req.body);
 
         // Optimizacion 1: Validacion de datos de entrada
-        if(!image || !name || !price || !type) {
+        if(!nombre || !tipo || !precio || !imagen) {
             return res.status(400).json({
                 message: "Datos invalidos, asegurate de enviar todos los campos"
             });
         }
 
-        let [result] = await ProductModel.insertProduct(image, name, price, type);
+        let [result] = await ProductModel.insertProduct(nombre, tipo, precio, imagen);
         console.log(result);
 
         // Codigo de estado 201 -> Created

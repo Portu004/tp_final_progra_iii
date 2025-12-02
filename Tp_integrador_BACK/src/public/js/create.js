@@ -19,7 +19,7 @@ altaProductsForm.addEventListener("submit", async (event) => {
     try {
         // let url = "http://localhost:3000/api/products";
         // Para hacer otras operaciones distintas a GET, necesitamos especificar mas informacion en el segundo parametro de fetch
-        let response = await fetch(url, { // Este 2o parametro es un objeto de opciones
+        let response = await fetch(`${url}/api/products`, { // Este 2o parametro es un objeto de opciones
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

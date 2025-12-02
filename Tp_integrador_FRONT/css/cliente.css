@@ -206,8 +206,10 @@ nav .search-container {
 #contenedor-carrito {
     align-items: center;
     justify-content: center;
-    margin-left: 150px;
-    margin-right: 150px;
+    max-width: 300px;
+    margin-left: auto; 
+    margin-right: auto; 
+    width: 90%;
     color: white;
 }
 

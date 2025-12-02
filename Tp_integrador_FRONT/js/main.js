@@ -20,7 +20,7 @@ function saludarclienteStorage() {
         window.location.href = "bienvenida.html"; 
         return; 
     }
-    document.getElementById("datos-alumno").textContent = "👋 Bienvenido " + nombre;
+    document.getElementById("datos-alumno").textContent = " Bienvenido " + nombre;
 }
 
 // ------------------------------------------------------

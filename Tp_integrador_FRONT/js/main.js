@@ -1,5 +1,5 @@
 // main.js - VERSIÓN FINAL INTEGRADA CON CONTADOR ACTUALIZABLE
-
+saludarclienteStorage();
 // 1. VARIABLES GLOBALES
 let productosTienda = []; 
 let listaParaOrdenar = []; 
@@ -10,6 +10,18 @@ const contenedorProductos = document.getElementById("contenedor-productos");
 const contenedorCarrito = document.getElementById("contenedor-carrito");
 const barraBusqueda = document.getElementById("barra-busqueda");
 const contadorCarrito = document.getElementById("contador-carrito");
+let boton_imprimir = document.getElementById("btn-imprimir");
+
+
+function saludarclienteStorage() {
+    const nombre = sessionStorage.getItem("nombreUsuario");
+    if (!nombre || nombre === "") {
+        console.log("No se encontró nombre de usuario. Redirigiendo a bienvenida.");
+        window.location.href = "bienvenida.html"; 
+        return; 
+    }
+    document.getElementById("datos-alumno").textContent = "👋 Bienvenido " + nombre;
+}
 
 // ------------------------------------------------------
 // 2. CONEXIÓN CON EL SERVIDOR
@@ -70,11 +82,6 @@ function eliminarDelCarrito(indice) {
 function vaciarCarrito() {
     carrito = []; 
     actualizarCarritoStorage();
-}
-
-function saludarclienteStorage() {
-    const nombre = localStorage.getItem("clienteNombre");
-    document.getElementById("datos-alumno").textContent = "👋 Bienvenido " + nombre;
 }
 
 function actualizarCarritoStorage() {
@@ -161,6 +168,55 @@ if(btnOrdPrecio) {
     });
 }
 
+
+boton_imprimir.addEventListener("click", imprimirTicket);
+
+    function imprimirTicket(){
+        console.table(carrito)
+
+        const idProductos = [];
+
+
+        const { jsPDF } = window.jspdf;
+
+        const doc = new jsPDF();
+
+        let y = 10;
+
+        doc.setFontSize(18);
+
+        doc.text("ElectroTech-ticket de compra", 10, y);
+
+        y += 10;
+
+        carrito.forEach(prod => {
+            idProductos.push(prod.id);
+
+            doc.text(`${prod.nombre} / $${prod.precio}`, 20,y); 
+
+            y += 7
+        });
+
+        const precioTotal = carrito.reduce((total, prod) => total + parseInt(prod.precio), 0);
+
+        y += 5;
+
+
+        doc.text(`Total $${precioTotal}`, 10, y);
+
+
+        doc.save("ticket.pdf");
+
+
+    }
+
+
+
+
+
+
+
+
 // ------------------------------------------------------
 // 4. INICIALIZACIÓN
 // ------------------------------------------------------
@@ -178,12 +234,12 @@ function init() {
         mostrarCarrito();
     }
 
-    
     // Actualizar contador al inicio
     actualizarContadorCarrito();
 
     // Llamada al servidor
     obtenerProductos();
+
 }
 
 init();

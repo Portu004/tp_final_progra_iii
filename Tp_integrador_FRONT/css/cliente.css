@@ -265,6 +265,27 @@ nav .search-container {
     margin-top: 20px;
 }
 
+.caja-ticket{
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+
+#btn-imprimir{
+    background-color: purple;
+    color: #d7cedc;
+    border: none;
+    border-radius: 7px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+#btn-imprimir:hover{
+    background-color: #490a6a;
+}
+
 
 
 /* Responsive  media-query*/

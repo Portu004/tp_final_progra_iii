@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ElectroTech</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/3.0.3/jspdf.umd.min.js"></script>
     <link rel="stylesheet" href="css/cliente.css" />
     <link rel="icon" type="image/png" href="img/icono-robot.png">
     <script defer src="js/main.js"></script>
@@ -41,7 +42,10 @@
         <section id="contenedor-productos"></section>
         <hr>
         <section id="contenedor-carrito"></section>
-        
+
+        <section class="caja-ticket">
+        <button class="hidden orange-btn" id="btn-imprimir">Imprimir ticket</button>
+        </section>
     </main>
 </body>
 </html>

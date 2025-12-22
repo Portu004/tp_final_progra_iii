@@ -13,6 +13,7 @@ import { join, __dirname } from "./src/api/utils/index.js";
 import connection from "./src/api/database/db.js";
 
 import session from "express-session";
+import bcrypt from "bcrypt";
 /* guarda la info mientras navega el usuario/*
 /*====================
     Middlewares
@@ -71,12 +72,16 @@ try {
             });
         }
 
+        const saltRounds = 10;
+        const hashedPassword = await bcrypt.hash(contrasenia, saltRounds);
+
+
         let sql = 
             `INSERT INTO usuarios (correo, contrasenia)
             VALUES (?, ?)`
         ;
 
-        const [rows] = await connection.query(sql, [correo, contrasenia]);
+        const [rows] = await connection.query(sql, [correo, hashedPassword]);
 
         res.status(201).json({
             message: "Usuario creado con exito",
@@ -104,8 +109,8 @@ app.post("/login", async (req, res) => {
             });
         }
         // busca el usuario en la BD
-        const sql = `SELECT * FROM usuarios where correo = ? AND contrasenia = ?`;
-        const [rows] = await connection.query(sql, [correo, contrasenia]);
+        const sql = `SELECT * FROM usuarios where correo = ?`;
+        const [rows] = await connection.query(sql, [correo]);
 
         if(rows.length === 0) {
             return res.render("login", {
@@ -115,6 +120,12 @@ app.post("/login", async (req, res) => {
 
         console.log(rows);
         const user = rows[0];
+
+        const match = await bcrypt.compare(contrasenia, user.contrasenia);
+        if(!match) {
+            return res.render("login", { error: "Credenciales incorrectas!" });
+        }
+
         console.table(user);
 
         // Ahora toca guardar sesion y hacer el redirect
